@@ -1,0 +1,71 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    scroll-behavior: smooth;
+    font-style: normal;
+    line-height: normal;
+    color: $black;
+    font-family: "Roboto";
+    font-size: 18px;
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
+
+    &._noscroll {
+        overflow: hidden;
+    }
+
+    &::-webkit-scrollbar {
+    }
+
+    &::-webkit-scrollbar-thumb {
+    }
+}
+
+.wrapper {
+    min-height: 100%;
+    scroll-behavior: smooth;
+    overflow-x: clip;
+
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 1 auto;
+}
+
+._container {
+    width: 100%;
+    margin-inline: auto;
+    max-width: $container + px;
+
+    @media (max-width: $containerWithPadding + px) {
+        max-width: none;
+        padding-inline: $padding + px;
+    }
+}
+
+figure,
+img,
+svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+._btn {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 100px;
+    padding: 1em 2em;
+    color: #000;
+    background-color: $accent;
+    font-weight: 500;
+}
