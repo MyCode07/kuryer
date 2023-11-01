@@ -13,6 +13,9 @@
 // load swiper
 // @import "../../node_modules/swiper/swiper";
 
+// load dhx
+@import "../../node_modules/dhx-suite/codebase/suite.min";
+
 // load common
 @import "common/common";
 
@@ -34,6 +37,9 @@
 // load error 404
 @import "common/404";
 
+// load error form
+@import "common/form";
+
 // load to top
 @import "common/to-top";
 
@@ -48,3 +54,6 @@
 
 // load section
 @import "parts/section";
+
+// load calculator
+@import "parts/calculator";

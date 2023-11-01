@@ -1,0 +1,81 @@
+form {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        border-bottom: 2px solid #999999;
+        resize: none;
+        margin-bottom: 25px;
+        font-weight: 300;
+        @include adaptive-value("font-size", 16, 14, 1);
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"] {
+        @include adaptive-value("height", 60, 45, 1);
+    }
+
+    textarea {
+        @include adaptive-value("height", 120, 90, 1);
+    }
+
+    label {
+        @include adaptive-value("font-size", 15, 12, 1);
+        font-weight: 300;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            height: 20px;
+            width: 20px;
+            margin-right: 10px;
+
+            border: 2px solid $black;
+
+            opacity: 0.6;
+            transition: all 0.3s ease 0s;
+
+            &:before {
+                content: "";
+                width: 6px;
+                height: 12px;
+                border: solid #000;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+                margin-top: -2px;
+                flex: 0 0 auto;
+
+                opacity: 0;
+                transition: all 0.3s ease 0s;
+            }
+        }
+
+        input {
+            visibility: hidden;
+            position: absolute;
+
+            &:checked + .icon {
+                opacity: 1;
+
+                &:before {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    ._btn {
+        margin-top: 25px;
+
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+    }
+}

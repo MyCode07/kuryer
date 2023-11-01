@@ -14,6 +14,9 @@
         justify-content: center;
         flex-direction: column;
         padding: 100px 0 200px 0;
+
+        @include adaptive-value("padding-top", 100, 60, 1);
+        @include adaptive-value("padding-bottom", 200, 120, 1);
     }
 
     // .hero__image
@@ -44,25 +47,16 @@
     }
 
     h1 {
-        font-size: 50px;
-        font-weight: 600;
-        margin-bottom: 40px;
-        text-transform: uppercase;
         color: #fff;
         max-width: 760px;
+        @include adaptive-value("margin-bottom", 40, 25, 1);
     }
 
     p {
         color: #d1d1d1;
         margin-bottom: 80px;
-        font-size: 24px;
         max-width: 470px;
-        font-weight: 300;
-
-        strong,
-        b {
-            font-weight: 600;
-        }
+        @include adaptive-value("font-size", 24, 16, 1);
     }
 
     ._btn {
@@ -70,10 +64,10 @@
 
     .scroll-down {
         display: block;
-        width: 40px;
-
+        @include adaptive-value("width", 40, 30, 1);
+        @include adaptive-value('bottom', 100, 60, 1);
+        
         position: absolute;
-        bottom: 100px;
         left: 50%;
         transform: translate(-50%, 0);
 

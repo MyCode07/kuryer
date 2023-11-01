@@ -1,0 +1,159 @@
+.calculator {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+
+    // .calculator-item
+
+    &-item {
+        margin-bottom: 25px;
+
+        p {
+            margin-bottom: 10px;
+            @include adaptive-value("font-size", 20, 16, 1);
+        }
+
+        textarea,
+        input[type="tel"],
+        input[type="email"],
+        input[type="text"],
+        select {
+            width: 100%;
+
+            border: 1px solid $black;
+            padding: 0 15px;
+            background-color: transparent;
+            @include adaptive-value("height", 60, 45, 1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 300;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            .dot {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex: 0 0 auto;
+                height: 20px;
+                width: 20px;
+                margin-right: 10px;
+
+                border-radius: 50%;
+                border: 2px solid $black;
+
+                opacity: 0.6;
+                transition: all 0.3s ease 0s;
+
+                &:before {
+                    content: "";
+                    width: 10px;
+                    height: 10px;
+                    background-color: $black;
+                    flex: 0 0 auto;
+                    border-radius: 50%;
+
+                    opacity: 0;
+                    transition: all 0.3s ease 0s;
+                }
+            }
+
+            input {
+                visibility: hidden;
+                position: absolute;
+
+                &:checked + .dot {
+                    opacity: 1;
+
+                    &:before {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    // .calculator-total
+
+    &-total {
+    }
+
+    ._btn {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.dhx_slider__track {
+    position: relative;
+    padding-top: 0;
+    padding-bottom: 0;
+    cursor: pointer;
+    z-index: 1;
+
+    &:before {
+        background-color: #fff;
+    }
+}
+
+.dhx_slider__range {
+    background-color: $black;
+}
+
+.dhx_slider__thumb {
+    width: 20px;
+    height: 20px;
+    background-color: $black;
+}
+
+.dhx_slider__thumb:after {
+    background-color: #fff;
+}
+
+.dhx_slider__thumb:before {
+    display: none;
+}
+
+.dhx_slider__thumb-label {
+    background-color: #fff;
+    color: $black;
+    padding: 5px 16.5px;
+    font-weight: 300;
+    border-radius: 4px;
+}
+
+.range {
+    @include adaptive-value("margin-top", 36, 26, 1);
+
+    // .range-slider
+
+    &-slider {
+        padding: 0 10px;
+    }
+
+    // .range-output
+
+    &-output {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: 300;
+        margin-top: 10px;
+    }
+
+    // .range-min
+
+    &-min {
+    }
+
+    // .range-max
+
+    &-max {
+    }
+}
