@@ -314,8 +314,8 @@
                 text-decoration: underline;
             }
 
-            p{
-                &:not(:last-child){
+            p {
+                &:not(:last-child) {
                     margin-bottom: 10px;
                 }
             }
@@ -349,5 +349,17 @@
                 @include adaptive-value("margin-top", 25, 12, 1);
             }
         }
+    }
+}
+
+#text {
+    ul,
+    ol {
+        list-style: inherit;
+        padding-left: 1em;
+    }
+
+    li {
+        list-style: inherit;
     }
 }
