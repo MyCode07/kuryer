@@ -1,6 +1,7 @@
 "use strict"
 
-const url = '';
+const url = 'https://rabota-gorod.ru/wp-content/themes/blank-sheet/assets/files/curl.php';
+const formMsgs = document.querySelector('.form-msgs');
 
 document.addEventListener('DOMContentLoaded', function () {
     const forms = document.querySelectorAll('form')
@@ -11,12 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
 
                 let error = validateForm(form)
-
                 let formData = new FormData(form);
-
-                if (formFile && formFile.files[0]) {
-                    formData.append('file', formFile.files[0]);
-                }
 
                 if (error === 0) {
                     form.classList.add('_sending');
@@ -25,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         method: 'POST',
                         body: formData
                     });
-
 
                     if (response.ok) {
                         sentMessage(form)
@@ -45,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         }, 5000);
                     }
                 }
-
                 else {
                     fillAllFields(form)
 
@@ -54,16 +48,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         resetForm(form)
                     }, 5000);
                 }
-
             })
-
-            checkCheckBoxes(form)
         })
     }
 
     function validateForm(form) {
         let error = 0;
         const formReq = [...form.querySelectorAll('[data-required] input')].concat([...form.querySelectorAll('[data-required] textarea')])
+        console.log(formReq);
 
         for (let i = 0; i < formReq.length; i++) {
             const input = formReq[i]
@@ -84,13 +76,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         error++;
                     }
                 }
+                if (input.getAttribute('type') === 'checkbox') {
+                    if (!input.checked) {
+                        formAddError(input);
+                        error++;
+                    }
+                }
                 else {
                     if (input.getAttribute('name') === 'phone') {
                         if (/[_]/.test(input.value) || input.value.length < 18) {
                             formAddError(input);
                             error++;
                         }
-
                     }
                     else {
                         if (input.value.length < 2) {
@@ -117,81 +114,36 @@ document.addEventListener('DOMContentLoaded', function () {
         return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(input.value);
     }
 
-    function sentMessage(form) {
-        const submitBtn = form.querySelector('.form__button button')
+    function sentMessage() {
+        formMsgs.classList.remove('_error');
+        formMsgs.classList.remove('_req');
 
-        submitBtn.classList.add('_sent');
+        formMsgs.classList.add('_sent');
+        setTimeout(() => {
+            formMsgs.classList.remove('_sent');
+        }, 3000);
     }
 
-    function failMessage(form) {
-        const submitBtn = form.querySelector('.form__button button')
-        submitBtn.classList.add('_fail');
+    function failMessage() {
+        formMsgs.classList.remove('_sent');
+        formMsgs.classList.remove('_req');
+
+        formMsgs.classList.add('_error');
+        setTimeout(() => {
+            formMsgs.classList.remove('_error');
+        }, 3000);
     }
 
-    function fillAllFields(form) {
-        const submitBtn = form.querySelector('.form__button button')
-        submitBtn.classList.add('_error');
+    function fillAllFields() {
+        formMsgs.classList.remove('_sent');
+        formMsgs.classList.remove('_error');
+
+        formMsgs.classList.add('_req');
+        setTimeout(() => {
+            formMsgs.classList.remove('_req');
+        }, 3000);
     }
 
     function resetForm(form) {
-        const submitBtn = form.querySelector('.form__button button')
-        submitBtn.classList.remove('_error');
-        submitBtn.classList.remove('_fail');
-        submitBtn.classList.remove('_sent');
     }
-
-
-    const formFile = document.querySelector('input[name="file"]');
-    if (formFile) {
-        formFile.addEventListener('change', () => {
-            uploadFile(formFile.files[0]);
-        });
-
-        function uploadFile(file) {
-            if (!['application/msword', 'application/pdf', 'application/vnd.ms-powerpoint', 'text/plain'].includes(file.type)) {
-                alert('Разрешены только текстовые документы.');
-                document.querySelector('#filename').innerHTML = '';
-                formFile.value = '';
-                return;
-            }
-            if (file.size > 2 * 1024 * 1024) {
-                alert('Файл должен быть менее 2 МБ.');
-                return;
-            }
-
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                document.querySelector('#filename').innerHTML = file.name;
-            };
-
-            reader.onerror = function (e) {
-                alert('Ошибка');
-            };
-
-            reader.readAsDataURL(file);
-        }
-    }
-
 });
-
-function checkCheckBoxes(form) {
-    const checkBoxContainers = form.querySelectorAll('[data-checkbox-container]')
-    if (checkBoxContainers.length) {
-        checkBoxContainers.forEach(container => {
-            const cehckboxes = container.querySelectorAll('input[type="checkbox"]')
-
-            if (cehckboxes.length) {
-                cehckboxes.forEach(checkbox => {
-                    checkbox.addEventListener('input', () => {
-                        cehckboxes.forEach(item => {
-                            if (item != checkbox) {
-                                item.checked = false
-                            }
-                        })
-                    })
-                })
-            }
-        })
-    }
-}

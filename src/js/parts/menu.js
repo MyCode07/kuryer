@@ -35,14 +35,13 @@ if (menuLinks.length) {
     menuLinks.forEach(link => {
         link.addEventListener('click', (е) => {
 
-            if (!isMobile.any())
-                if (menu.classList.contains('_open')) unLockPadding();
-                else lockPadding()
+            if (menu.classList.contains('_open')) {
+                if (!isMobile.any()) unLockPadding();
 
-            menu.classList.toggle('_open');
-            burger.classList.toggle('_active');
-
-            body.classList.toggle('_noscroll');
+                menu.classList.remove('_open');
+                burger.classList.remove('_active');
+                body.classList.remove('_noscroll');
+            }
         })
     })
 }

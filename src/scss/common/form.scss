@@ -28,7 +28,7 @@ form {
         align-items: center;
         cursor: pointer;
 
-        .icon {
+        .wpcf7-form-control {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -57,11 +57,17 @@ form {
             }
         }
 
+        .wpcf7-list-item {
+            display: none;
+        }
+
         input {
             visibility: hidden;
             position: absolute;
+        }
 
-            &:checked + .icon {
+        &:has(input:checked) {
+            .wpcf7-form-control {
                 opacity: 1;
 
                 &:before {
@@ -69,13 +75,78 @@ form {
                 }
             }
         }
+
+        a {
+            color: $accent;
+            text-decoration: underline;
+        }
     }
 
     ._btn {
         margin-top: 25px;
+        cursor: pointer;
 
         @media (max-width: 768px) {
             width: 100%;
         }
+    }
+
+    &._sending {
+        pointer-events: none;
+    }
+}
+
+.form__input {
+    &._error {
+        input,
+        textarea,
+        label,
+        label .icon {
+            border-color: red;
+            color: red;
+
+            &::placeholder {
+                color: red;
+            }
+        }
+    }
+}
+
+.wpcf7-response-output {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: 16;
+    width: 100%;
+    max-width: 560px;
+    background-color: #fff;
+    @include adaptive-value("font-size", 24, 16, 1);
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5em 1em !important;
+    margin: 0 !important;
+    border: 0 !important;
+
+    transform: translate(-50%, 101%);
+    pointer-events: none;
+    transition: all 0.3s ease 0s;
+    display: block !important;
+
+    &._sent {
+        transform: translate(-50%, 0);
+        pointer-events: all;
+        color: $accent;
+    }
+
+    &._req {
+        transform: translate(-50%, 0);
+        pointer-events: all;
+        color: red;
+    }
+
+    &._error {
+        transform: translate(-50%, 0);
+        pointer-events: all;
+        color: red;
     }
 }

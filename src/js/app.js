@@ -4,6 +4,6 @@ import { maskInputs } from "./static/inputmask.js";
 import { accorden } from "./static/accordeon.js";
 import { toTop } from "./static/to-top.js";
 
-maskInputs('+7 (999) 999-99-99', 'input[name="phone"]')
+maskInputs('+7 (999) 999-99-99', 'input[name="your-phone"]')
 accorden();
 toTop();
