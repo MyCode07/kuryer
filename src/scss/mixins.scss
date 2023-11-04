@@ -24,3 +24,4 @@ $mobileWidth: 375;
         #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - #{$mobileWidth + px}) / #{$maxWidth - $mobileWidth}));
     }
 }
+ 
